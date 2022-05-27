@@ -10,8 +10,104 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="190px"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.7*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+            <GroupBox Header="Исходные данные" Padding="5" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label VerticalAlignment="Center" Grid.Row="0">Дата рождения:</Label>
+                    <DatePicker Grid.Row="0" SelectedDateFormat="Long" SelectedDate="04/23/2002"
+                  DisplayDateStart="01/01/1910" DisplayDateEnd="01/01/2022" 
+                  FirstDayOfWeek="Monday" Width="120px" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+                    <Label VerticalAlignment="Center" Grid.Row="1">Дата отсчета:</Label>
+                    <DatePicker Grid.Row="1" SelectedDateFormat="Long" SelectedDate="05/27/2022"
+                  DisplayDateStart="01/01/1910" DisplayDateEnd="01/01/2022" 
+                  FirstDayOfWeek="Monday" Width="120px" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+                    <Label Grid.Row="2" VerticalAlignment="Center">Длительность прогноза: </Label>
+                    <ComboBox Width="50px" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <ComboBoxItem IsSelected="True">30</ComboBoxItem>
+                        <ComboBoxItem>40</ComboBoxItem>
+                        <ComboBoxItem>50</ComboBoxItem>
+                    </ComboBox>
+
+                    <CheckBox VerticalAlignment="Center" Grid.Row="3">
+                        <TextBlock>Произвольная длительность прогноза</TextBlock>
+                    </CheckBox>
+
+                    <TextBox IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="40px" Text="100" Grid.Row="5">
+                        
+                    </TextBox>
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Grid.Column="1" Header="Рассчетные данные" Padding="5" Margin="5">
+                
+            </GroupBox>
+
+            <GroupBox Grid.Column="2" Header="Статистика" Padding="5" Margin="5">
+                <ScrollViewer>
+                    
+                </ScrollViewer>
+            </GroupBox>
+            
+        </Grid>
+
+        <WrapPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <Button VerticalAlignment="Center" Height="30px" Margin="10 0">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <StackPanel Orientation="Horizontal" Margin="5 0">
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="0 0 5 0" Source="/Resources/Image/graph.png" Stretch="Fill" Width="20px" Height="15px" />
+                    <TextBlock VerticalAlignment="Center"><Run Text="Посторить гарфик"/></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button VerticalAlignment="Center" Height="30px" Margin="10 0">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <StackPanel Orientation="Horizontal" Margin="5 0">
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="0 0 5 0" Source="/Resources/Image/word.png" Stretch="Fill" Width="20px" Height="20px" />
+                    <TextBlock VerticalAlignment="Center"><Run Text="Сохранить в Word"/></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <CheckBox VerticalAlignment="Center">Выводить дату на шкале</CheckBox>
+        </WrapPanel>
+
+        <GroupBox Grid.Row="3" Header="График" Padding="5" Margin="5">
+            
+        </GroupBox>
+
     </Grid>
 </Page>

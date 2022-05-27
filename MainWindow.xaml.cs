@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BiorhythmsCalc.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace BiorhythmsCalc
         public MainWindow()
         {
             InitializeComponent();
+
+            frame.Navigate(new MainView());
         }
     }
 }
