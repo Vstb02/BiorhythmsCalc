@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BiorhythmsCalc.Views"
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" xmlns:local1="clr-namespace:BiorhythmsCalc.Models"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainView">
@@ -55,11 +56,11 @@
                         <ComboBoxItem>50</ComboBoxItem>
                     </ComboBox>
 
-                    <CheckBox VerticalAlignment="Center" Grid.Row="3">
+                    <CheckBox VerticalAlignment="Center" Grid.Row="3" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
                         <TextBlock>Произвольная длительность прогноза</TextBlock>
                     </CheckBox>
 
-                    <TextBox IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="40px" Text="100" Grid.Row="5">
+                    <TextBox x:Name="arbitrary" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="40px" Text="100" Grid.Row="5">
                         
                     </TextBox>
                 </Grid>
@@ -67,7 +68,13 @@
             </GroupBox>
 
             <GroupBox Grid.Column="1" Header="Рассчетные данные" Padding="5" Margin="5">
-                
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{DynamicResource ResourceKey=biorhythms}">
+                    <DataGrid.Resources>
+                        <col:ArrayList x:Key="biorhythms">
+                            <local1:Biorhythms />
+                        </col:ArrayList>
+                    </DataGrid.Resources>
+                </DataGrid>
             </GroupBox>
 
             <GroupBox Grid.Column="2" Header="Статистика" Padding="5" Margin="5">
@@ -79,7 +86,7 @@
         </Grid>
 
         <WrapPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
-            <Button VerticalAlignment="Center" Height="30px" Margin="10 0">
+            <Button VerticalAlignment="Center" Height="30px" Margin="10 0" Click="Button_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

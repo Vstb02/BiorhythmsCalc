@@ -24,5 +24,19 @@ namespace BiorhythmsCalc.Views
         {
             InitializeComponent();
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            arbitrary.IsEnabled = true;
+        }
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            arbitrary.IsEnabled = false;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
