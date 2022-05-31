@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BiorhythmsCalc.Models
 {
-    public class Biorhythms
+    public class Biorhythm
     {
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public double Physical { get; set; }
         public double Emotional { get; set; }
         public double Intellectual { get; set; }

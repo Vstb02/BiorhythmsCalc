@@ -40,20 +40,27 @@
                     </Grid.RowDefinitions>
 
                     <Label VerticalAlignment="Center" Grid.Row="0">Дата рождения:</Label>
-                    <DatePicker Grid.Row="0" SelectedDateFormat="Long" SelectedDate="04/23/2002"
+                    <DatePicker x:Name="BirthDate" Grid.Row="0" SelectedDateFormat="Long" SelectedDate="04/23/2002"
                   DisplayDateStart="01/01/1910" DisplayDateEnd="01/01/2022" 
                   FirstDayOfWeek="Monday" Width="120px" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                     <Label VerticalAlignment="Center" Grid.Row="1">Дата отсчета:</Label>
-                    <DatePicker Grid.Row="1" SelectedDateFormat="Long" SelectedDate="05/27/2022"
-                  DisplayDateStart="01/01/1910" DisplayDateEnd="01/01/2022" 
+                    <DatePicker x:Name="countDownTime" Grid.Row="1" SelectedDateFormat="Long" SelectedDate="05/27/2022"
+                  DisplayDateStart="01/01/1910" 
                   FirstDayOfWeek="Monday" Width="120px" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                     <Label Grid.Row="2" VerticalAlignment="Center">Длительность прогноза: </Label>
-                    <ComboBox Width="50px" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
-                        <ComboBoxItem IsSelected="True">30</ComboBoxItem>
+                    <ComboBox Name="cmbCountdown" Width="50px" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <ComboBoxItem IsSelected="True">10</ComboBoxItem>
+                        <ComboBoxItem>20</ComboBoxItem>
+                        <ComboBoxItem>30</ComboBoxItem>
                         <ComboBoxItem>40</ComboBoxItem>
                         <ComboBoxItem>50</ComboBoxItem>
+                        <ComboBoxItem>60</ComboBoxItem>
+                        <ComboBoxItem>70</ComboBoxItem>
+                        <ComboBoxItem>80</ComboBoxItem>
+                        <ComboBoxItem>90</ComboBoxItem>
+                        <ComboBoxItem>100</ComboBoxItem>
                     </ComboBox>
 
                     <CheckBox VerticalAlignment="Center" Grid.Row="3" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
@@ -68,12 +75,14 @@
             </GroupBox>
 
             <GroupBox Grid.Column="1" Header="Рассчетные данные" Padding="5" Margin="5">
-                <DataGrid AutoGenerateColumns="True" ItemsSource="{DynamicResource ResourceKey=biorhythms}">
-                    <DataGrid.Resources>
-                        <col:ArrayList x:Key="biorhythms">
-                            <local1:Biorhythms />
-                        </col:ArrayList>
-                    </DataGrid.Resources>
+                <DataGrid IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Name="Dates" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Date}" Width="*" Header="Дата"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Physical}" Width="*" Header="Физический"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Emotional}" Width="*" Header="Эмоциональный"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Intellectual}" Width="*" Header="Интелектуальный"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Total}" Width="*" Header="Суммарное"></DataGridTextColumn>
+                    </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
 
