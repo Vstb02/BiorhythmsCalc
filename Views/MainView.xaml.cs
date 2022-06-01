@@ -1,7 +1,8 @@
 ﻿using BiorhythmsCalc.Models;
+using LiveCharts;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfDrawing.Charts;
 
 namespace BiorhythmsCalc.Views
 {
@@ -23,6 +23,8 @@ namespace BiorhythmsCalc.Views
     /// </summary>
     public partial class MainView : Page
     {
+        List<string> Labels = new List<string>();
+
         public MainView()
         {
             InitializeComponent();
@@ -64,7 +66,7 @@ namespace BiorhythmsCalc.Views
                 }
                 catch
                 {
-                    MessageBox.Show("Произошла ошибка при получении данных отчета");
+                    MessageBox.Show("Произошла ошибка при получении данных отcчета");
                 }
             }
             else
@@ -78,10 +80,20 @@ namespace BiorhythmsCalc.Views
                     MessageBox.Show("Произошла ошибка при получении данных отчета");
                 }
             }
-            DateTime dateCountDown;
+            DateTime dateCountDown = Convert.ToDateTime(countDownTime.Text);
+
+            double maxEm = double.MinValue;
+            double maxInt = double.MinValue;
+            double maxPhys = double.MinValue;
+            double maxSum = double.MinValue;
+            string maxEmDate = String.Empty;
+            string maxIntDate = String.Empty;
+            string maxPhysDate = String.Empty;
+            string maxSumDate = String.Empty;
+
+
             for (int i = 0; i < arbitrarys; i++)
             {
-                dateCountDown = Convert.ToDateTime(countDownTime.Text);
                 var bior = new Biorhythm()
                 {
                     Date = dateCountDown.AddDays(i).ToShortDateString(),
@@ -95,61 +107,103 @@ namespace BiorhythmsCalc.Views
             }
             Dates.ItemsSource = biorhythms;
 
-            ////////////////////
-
-
-            // Удаляем прежний график.
-            GridForChart.Children.OfType<Canvas>().ToList().ForEach(p => GridForChart.Children.Remove(p));
-
-            Chart chart = null;
-            Chart chart1 = null;
-            Chart chart2 = null;
-
-            chart = new LineChart();
-            chart1 = new LineChart();
-            chart2 = new LineChart();
-
-            // Добавляем новую диаграмму на поле контейнера для графиков.
-            GridForChart.Children.Add(chart.ChartBackground);
-            GridForChart.Children.Add(chart1.ChartBackground);
-            GridForChart.Children.Add(chart2.ChartBackground);
-
-            // Принудительно обновляем размеры контейнера для графика.
-            GridForChart.UpdateLayout();
-
-            // Создаём график.
-            CreateChartEmotional(chart, biorhythms);
-            CreateChartPhysical(chart1, biorhythms);
-            CreateChartIntellectual(chart2, biorhythms);
-        }
-
-
-        private static void CreateChartEmotional(Chart chart, List<Biorhythm> biorhythms)
-        {
-            chart.Clear();
-
-            for (int i = 0; i < biorhythms.Count; i++)
+            foreach (Biorhythm bior in biorhythms)
             {
-                chart.AddValue(biorhythms[i].Emotional);
+                if (bior.Physical > maxPhys)
+                {
+                    maxPhys = bior.Physical;
+                    maxPhysDate = bior.Date;
+                }
+                if (bior.Emotional > maxEm)
+                {
+                    maxEm = bior.Emotional;
+                    maxEmDate = bior.Date;
+                }
+                if (bior.Intellectual > maxInt)
+                {
+                    maxInt = bior.Intellectual;
+                    maxIntDate = bior.Date;
+                }
+                if (bior.Total > maxSum)
+                {
+                    maxSum = bior.Total;
+                    maxSumDate = bior.Date;
+                }
+            }
+
+
+            list.Items.Clear();
+            list.Items.Add($"Дата рождения - {birthDate.ToShortDateString()}");
+            list.Items.Add($"Длительность прогноза - {arbitrarys}");
+            list.Items.Add($"Период с - {dateCountDown.ToShortDateString()} - {dateCountDown.AddDays(arbitrarys).ToShortDateString() }");
+            list.Items.Add($"Эмоциональный максимум - {maxEm}: {maxEmDate}");
+            list.Items.Add($"Интеллектуальный максимум - {maxInt}: {maxIntDate}");
+            list.Items.Add($"Физический максимум - {maxPhys}: {maxPhysDate}");
+
+            ChartValues<double> PhysicalValues = new ChartValues<double>();
+            ChartValues<double> EmotionalValues = new ChartValues<double>();
+            ChartValues<double> IntellectualValues = new ChartValues<double>();
+            SeriesCollection series = new SeriesCollection();
+
+            foreach (Biorhythm bior in biorhythms)
+            {
+                PhysicalValues.Add(bior.Physical);
+                EmotionalValues.Add(bior.Emotional);
+                IntellectualValues.Add(bior.Intellectual);
+                Labels.Add(bior.Date.ToString());
+            }
+
+            series.Add(new LineSeries
+            {
+                Title = "Физические ритмы",
+                Values = PhysicalValues,
+            });
+            series.Add(new LineSeries
+            {
+                Title = "Эмоциональные ритмы",
+                Values = EmotionalValues
+            });
+            series.Add(new LineSeries
+            {
+                Title = "Интеллектуальные ритмы",
+                Values = IntellectualValues
+            });
+            chart.AxisY = new AxesCollection()
+            {
+                new Axis()
+                {
+                    Title = "Значения",
+                    MinValue = -100,
+                    MaxValue = 100,
+                }
+            };
+            chart.Series = series;
+            chart.Update();
+
+
+            if (dateon.IsChecked == true)
+            {
+                chart.AxisX = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        Title = "Дата",
+                        Labels = Labels,
+                    }
+                };
+            }
+            else
+            {
+                chart.AxisX = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        Title = "Дата",
+                        MinValue = 0,
+                    }
+                };
             }
         }
-        private static void CreateChartPhysical(Chart chart, List<Biorhythm> biorhythms)
-        {
-            chart.Clear();
 
-            for (int i = 0; i < biorhythms.Count; i++)
-            {
-                chart.AddValue(biorhythms[i].Physical);
-            }
-        }
-        private static void CreateChartIntellectual(Chart chart, List<Biorhythm> biorhythms)
-        {
-            chart.Clear();
-
-            for (int i = 0; i < biorhythms.Count; i++)
-            {
-                chart.AddValue(biorhythms[i].Intellectual);
-            }
-        }
     }
 }

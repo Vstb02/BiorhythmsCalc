@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BiorhythmsCalc.Views"
       xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" xmlns:local1="clr-namespace:BiorhythmsCalc.Models"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainView">
@@ -88,7 +89,8 @@
 
             <GroupBox Grid.Column="2" Header="Статистика" Padding="5" Margin="5">
                 <ScrollViewer>
-
+                    <ListBox Name="list">
+                    </ListBox>
                 </ScrollViewer>
             </GroupBox>
 
@@ -118,10 +120,13 @@
                 </StackPanel>
             </Button>
 
-            <CheckBox VerticalAlignment="Center">Выводить дату на шкале</CheckBox>
+            <CheckBox x:Name="dateon" VerticalAlignment="Center">Выводить дату на шкале</CheckBox>
         </WrapPanel>
 
-        <Grid x:Name="GridForChart" Grid.Row="3" Margin="10">
-        </Grid>
+        <GroupBox Grid.Row="3" Header="График" Padding="5" Margin="5">
+            <lvc:CartesianChart Name="chart"  LegendLocation="Right" >
+            </lvc:CartesianChart>
+        </GroupBox>
+
     </Grid>
 </Page>
