@@ -1,6 +1,7 @@
 ﻿using BiorhythmsCalc.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfDrawing.Charts;
 
 namespace BiorhythmsCalc.Views
 {
@@ -92,6 +94,62 @@ namespace BiorhythmsCalc.Views
                 biorhythms.Add(bior);
             }
             Dates.ItemsSource = biorhythms;
+
+            ////////////////////
+
+
+            // Удаляем прежний график.
+            GridForChart.Children.OfType<Canvas>().ToList().ForEach(p => GridForChart.Children.Remove(p));
+
+            Chart chart = null;
+            Chart chart1 = null;
+            Chart chart2 = null;
+
+            chart = new LineChart();
+            chart1 = new LineChart();
+            chart2 = new LineChart();
+
+            // Добавляем новую диаграмму на поле контейнера для графиков.
+            GridForChart.Children.Add(chart.ChartBackground);
+            GridForChart.Children.Add(chart1.ChartBackground);
+            GridForChart.Children.Add(chart2.ChartBackground);
+
+            // Принудительно обновляем размеры контейнера для графика.
+            GridForChart.UpdateLayout();
+
+            // Создаём график.
+            CreateChartEmotional(chart, biorhythms);
+            CreateChartPhysical(chart1, biorhythms);
+            CreateChartIntellectual(chart2, biorhythms);
+        }
+
+
+        private static void CreateChartEmotional(Chart chart, List<Biorhythm> biorhythms)
+        {
+            chart.Clear();
+
+            for (int i = 0; i < biorhythms.Count; i++)
+            {
+                chart.AddValue(biorhythms[i].Emotional);
+            }
+        }
+        private static void CreateChartPhysical(Chart chart, List<Biorhythm> biorhythms)
+        {
+            chart.Clear();
+
+            for (int i = 0; i < biorhythms.Count; i++)
+            {
+                chart.AddValue(biorhythms[i].Physical);
+            }
+        }
+        private static void CreateChartIntellectual(Chart chart, List<Biorhythm> biorhythms)
+        {
+            chart.Clear();
+
+            for (int i = 0; i < biorhythms.Count; i++)
+            {
+                chart.AddValue(biorhythms[i].Intellectual);
+            }
         }
     }
 }

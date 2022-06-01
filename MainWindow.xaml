@@ -8,5 +8,6 @@
         Title="MainWindow" Height="450" Width="900" MinWidth="900">
     <Grid>
         <Frame x:Name="frame"></Frame>
+
     </Grid>
 </Window>
