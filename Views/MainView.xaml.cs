@@ -183,29 +183,6 @@ namespace BiorhythmsCalc.Views
                 }
             };
 
-            if (dateon.IsChecked == true)
-            {
-                chart.AxisX = new AxesCollection()
-                {
-                    new Axis()
-                    {
-                        Title = "Дата",
-                        Labels = Labels,
-                    }
-                };
-            }
-            else
-            {
-                chart.AxisX = new AxesCollection()
-                {
-                    new Axis()
-                    {
-                        Title = "Дата",
-                        MinValue = 0,
-                    }
-                };
-            }
-
             chart.Series = series;
             chart.Update();
         }
@@ -213,6 +190,29 @@ namespace BiorhythmsCalc.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Export.ExportDataToCsv(biorhythms, "datafile", list);
+        }
+
+        private void dateon_Checked(object sender, RoutedEventArgs e)
+        {
+            chart.AxisX = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        Title = "Дата",
+                        Labels = Labels,
+                    }
+                };
+        }
+        private void dateon_UnChecked(object sender, RoutedEventArgs e)
+        {
+            chart.AxisX = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        Title = "Дата",
+                        MinValue = 0,
+                    }
+                };
         }
     }
 }

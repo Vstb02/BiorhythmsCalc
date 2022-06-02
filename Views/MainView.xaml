@@ -121,7 +121,7 @@
                 </StackPanel>
             </Button>
 
-            <CheckBox x:Name="dateon" VerticalAlignment="Center">Выводить дату на шкале</CheckBox>
+            <CheckBox x:Name="dateon" VerticalAlignment="Center" Checked="dateon_Checked" Unchecked="dateon_UnChecked">Выводить дату на шкале</CheckBox>
         </WrapPanel>
 
         <GroupBox Grid.Row="3" Header="График" Padding="5" Margin="5">
