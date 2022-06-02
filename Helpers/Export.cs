@@ -13,7 +13,7 @@ namespace BiorhythmsCalc.Helpers
     {
         public static void ExportDataToCsv(List<Biorhythm> DG, string filename, ListBox list)
         {
-            string path = filename + ".rtf";
+            string path = filename + ".csv";
             string text = "Статистика: \n";
             var data = DG.ToArray();
             var RowCount = data.Length;
