@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:BiorhythmsCalc.Views"
       xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" xmlns:local1="clr-namespace:BiorhythmsCalc.Models"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainView">
@@ -46,7 +47,7 @@
                   FirstDayOfWeek="Monday" Width="120px" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                     <Label VerticalAlignment="Center" Grid.Row="1">Дата отсчета:</Label>
-                    <DatePicker x:Name="countDownTime" Grid.Row="1" SelectedDateFormat="Long" SelectedDate="05/27/2022"
+                    <DatePicker x:Name="countDownTime" Grid.Row="1" SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Now}"
                   DisplayDateStart="01/01/1910" 
                   FirstDayOfWeek="Monday" Width="120px" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
@@ -108,7 +109,7 @@
                     <TextBlock VerticalAlignment="Center"><Run Text="Посторить гарфик"/></TextBlock>
                 </StackPanel>
             </Button>
-            <Button VerticalAlignment="Center" Height="30px" Margin="10 0">
+            <Button VerticalAlignment="Center" Height="30px" Margin="10 0" Click="Button_Click_1">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -124,7 +125,7 @@
         </WrapPanel>
 
         <GroupBox Grid.Row="3" Header="График" Padding="5" Margin="5">
-            <lvc:CartesianChart Name="chart"  LegendLocation="Right" >
+            <lvc:CartesianChart Name="chart"  LegendLocation="Bottom" >
             </lvc:CartesianChart>
         </GroupBox>
 

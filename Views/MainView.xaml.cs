@@ -3,6 +3,7 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.MessageBox;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace BiorhythmsCalc.Views
 {
@@ -24,6 +28,7 @@ namespace BiorhythmsCalc.Views
     public partial class MainView : Page
     {
         List<string> Labels = new List<string>();
+        List<Biorhythm> biorhythms = new List<Biorhythm>();
 
         public MainView()
         {
@@ -41,7 +46,7 @@ namespace BiorhythmsCalc.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            List<Biorhythm> biorhythms = new List<Biorhythm>();
+            biorhythms.Clear();
             int arbitrarys = 0;
             DateTime birthDate = DateTime.Now;
 
@@ -90,7 +95,6 @@ namespace BiorhythmsCalc.Views
             string maxIntDate = String.Empty;
             string maxPhysDate = String.Empty;
             string maxSumDate = String.Empty;
-
 
             for (int i = 0; i < arbitrarys; i++)
             {
@@ -144,7 +148,7 @@ namespace BiorhythmsCalc.Views
             ChartValues<double> EmotionalValues = new ChartValues<double>();
             ChartValues<double> IntellectualValues = new ChartValues<double>();
             SeriesCollection series = new SeriesCollection();
-
+            Labels.Clear();
             foreach (Biorhythm bior in biorhythms)
             {
                 PhysicalValues.Add(bior.Physical);
@@ -177,9 +181,6 @@ namespace BiorhythmsCalc.Views
                     MaxValue = 100,
                 }
             };
-            chart.Series = series;
-            chart.Update();
-
 
             if (dateon.IsChecked == true)
             {
@@ -203,7 +204,57 @@ namespace BiorhythmsCalc.Views
                     }
                 };
             }
+
+            chart.Series = series;
+            chart.Update();
+        }
+        public void ExportDataToWord(List<Biorhythm> DG, string filename)
+        {
+            string path = filename + ".rtf";
+            string text = "Статистика: \n";
+            var data = DG.ToArray();
+            var RowCount = data.Length;
+            var ColumnCount = 3;
+            Object[,] DataArray = new object[RowCount + 1, ColumnCount + 1];
+
+            DataArray[0, 0] = "Дата";
+            DataArray[0, 1] = "Эмоц.";
+            DataArray[0, 2] = "Физич.";
+            DataArray[0, 3] = "Интеллект.";
+
+            for (int i = 0; i < RowCount; i++)
+            {
+                DataArray[i + 1, 0] = data[i].Date;
+                DataArray[i + 1, 1] = data[i].Emotional;
+                DataArray[i + 1, 2] = data[i].Physical;
+                DataArray[i + 1, 3] = data[i].Intellectual;
+            }
+
+            foreach (var item in list.Items)
+            {
+                text += item + "\n";
+            }
+
+            using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
+            {
+                writer.WriteLine(text);
+            }
+            using (StreamWriter writer = new StreamWriter(path, true, Encoding.Unicode))
+            {
+                for (int i = 0; i < RowCount + 1; i++)
+                {
+                    for (int j = 0; j < ColumnCount + 1; j++)
+                    {
+                        writer.Write("{0,10} | ", DataArray[i, j]);
+                    }
+                    writer.WriteLine();
+                }
+            }
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ExportDataToWord(biorhythms, "dasd");
+        }
     }
 }
