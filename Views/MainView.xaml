@@ -117,7 +117,7 @@
                 </Button.Resources>
                 <StackPanel Orientation="Horizontal" Margin="5 0">
                     <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="0 0 5 0" Source="/Resources/Image/word.png" Stretch="Fill" Width="20px" Height="20px" />
-                    <TextBlock VerticalAlignment="Center"><Run Text="Сохранить в Word"/></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Text="Сохранить в Csv"/>
                 </StackPanel>
             </Button>
 

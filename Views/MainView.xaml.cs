@@ -1,4 +1,5 @@
-﻿using BiorhythmsCalc.Models;
+﻿using BiorhythmsCalc.Helpers;
+using BiorhythmsCalc.Models;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System;
@@ -208,53 +209,10 @@ namespace BiorhythmsCalc.Views
             chart.Series = series;
             chart.Update();
         }
-        public void ExportDataToWord(List<Biorhythm> DG, string filename)
-        {
-            string path = filename + ".rtf";
-            string text = "Статистика: \n";
-            var data = DG.ToArray();
-            var RowCount = data.Length;
-            var ColumnCount = 3;
-            Object[,] DataArray = new object[RowCount + 1, ColumnCount + 1];
-
-            DataArray[0, 0] = "Дата";
-            DataArray[0, 1] = "Эмоц.";
-            DataArray[0, 2] = "Физич.";
-            DataArray[0, 3] = "Интеллект.";
-
-            for (int i = 0; i < RowCount; i++)
-            {
-                DataArray[i + 1, 0] = data[i].Date;
-                DataArray[i + 1, 1] = data[i].Emotional;
-                DataArray[i + 1, 2] = data[i].Physical;
-                DataArray[i + 1, 3] = data[i].Intellectual;
-            }
-
-            foreach (var item in list.Items)
-            {
-                text += item + "\n";
-            }
-
-            using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
-            {
-                writer.WriteLine(text);
-            }
-            using (StreamWriter writer = new StreamWriter(path, true, Encoding.Unicode))
-            {
-                for (int i = 0; i < RowCount + 1; i++)
-                {
-                    for (int j = 0; j < ColumnCount + 1; j++)
-                    {
-                        writer.Write("{0,10} | ", DataArray[i, j]);
-                    }
-                    writer.WriteLine();
-                }
-            }
-        }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ExportDataToWord(biorhythms, "dasd");
+            Export.ExportDataToCsv(biorhythms, "datafile", list);
         }
     }
 }
