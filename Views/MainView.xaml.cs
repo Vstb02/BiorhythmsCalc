@@ -39,6 +39,11 @@ namespace BiorhythmsCalc.Views
         /// </summary>
         ObservableCollection<Biorhythm> biorhythms = new ObservableCollection<Biorhythm>();
 
+        /// <summary>
+        /// Проверка данных
+        /// </summary>
+        bool check = false;
+
         public MainView()
         {
             InitializeComponent();
@@ -71,6 +76,7 @@ namespace BiorhythmsCalc.Views
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            check = true;
             int arbitrarys = 0;
             DateTime birthDate = DateTime.Now;
             DateTime dateCountDown = DateTime.Now;
@@ -132,7 +138,15 @@ namespace BiorhythmsCalc.Views
         /// <param name="e"></param>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Export.ExportDataToCsv(biorhythms, "datafile", list);
+            if (check == true)
+            {
+                Export.ExportDataToCsv(biorhythms, "datafile", list);
+                MessageBox.Show("Экспорт прошел успешно!");
+            }
+            else
+            {
+                MessageBox.Show("Сначала введите данных!");
+            }
         }
 
         /// <summary>
