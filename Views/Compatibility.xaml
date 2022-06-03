@@ -1,15 +1,15 @@
-﻿<Page x:Class="BiorhythmsCalc.Views.MainView"
+﻿<Page x:Class="BiorhythmsCalc.Views.Compatibility"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BiorhythmsCalc.Views"
-      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" xmlns:local1="clr-namespace:BiorhythmsCalc.Models"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" xmlns:local1="clr-namespace:BiorhythmsCalc.Models"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainView">
+      Title="Compatibility">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -39,20 +39,26 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Label VerticalAlignment="Center" Grid.Row="0">Дата рождения:</Label>
+                    <Label VerticalAlignment="Center" Grid.Row="0">Дата рождения 1: </Label>
                     <DatePicker x:Name="BirthDate" Grid.Row="0" SelectedDateFormat="Long" SelectedDate="04/23/2002"
                   DisplayDateStart="01/01/1910" DisplayDateEnd="01/01/2022" 
                   FirstDayOfWeek="Monday" Width="120px" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
-                    <Label VerticalAlignment="Center" Grid.Row="1">Дата отсчета:</Label>
-                    <DatePicker x:Name="countDownTime" Grid.Row="1" SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Now}"
+                    <Label VerticalAlignment="Center" Grid.Row="1">Дата рождения 2:</Label>
+                    <DatePicker x:Name="BirthDate1" Grid.Row="1" SelectedDateFormat="Long" SelectedDate="07/08/2002"
+                  DisplayDateStart="01/01/1910" DisplayDateEnd="01/01/2022" 
+                  FirstDayOfWeek="Monday" Width="120px" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+                    <Label VerticalAlignment="Center" Grid.Row="2">Дата отсчета:</Label>
+                    <DatePicker x:Name="countDownTime" Grid.Row="2" SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Now}"
                   DisplayDateStart="01/01/1910" 
                   FirstDayOfWeek="Monday" Width="120px" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
-                    <Label Grid.Row="2" VerticalAlignment="Center">Длительность прогноза:</Label>
-                    <ComboBox Name="cmbCountdown" Width="50px" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Label Grid.Row="3" VerticalAlignment="Center">Длительность прогноза:</Label>
+                    <ComboBox Name="cmbCountdown" Width="50px" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <ComboBoxItem IsSelected="True">10</ComboBoxItem>
                         <ComboBoxItem>20</ComboBoxItem>
                         <ComboBoxItem>30</ComboBoxItem>
@@ -65,7 +71,7 @@
                         <ComboBoxItem>100</ComboBoxItem>
                     </ComboBox>
 
-                    <CheckBox VerticalAlignment="Center" Grid.Row="3" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
+                    <CheckBox VerticalAlignment="Center" Grid.Row="4" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
                         <TextBlock>Произвольная длительность прогноза</TextBlock>
                     </CheckBox>
 

@@ -1,6 +1,7 @@
 ﻿using BiorhythmsCalc.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,18 @@ using System.Windows.Controls;
 
 namespace BiorhythmsCalc.Helpers
 {
+    /// <summary>
+    /// Экспорт данных
+    /// </summary>
     public static class Export
     {
-        public static void ExportDataToCsv(List<Biorhythm> DG, string filename, ListBox list)
+        /// <summary>
+        /// Экспорт данных статистики и биоритмов в csv
+        /// </summary>
+        /// <param name="DG"></param>
+        /// <param name="filename"></param>
+        /// <param name="list"></param>
+        public static void ExportDataToCsv(ObservableCollection<Biorhythm> DG, string filename, ListBox list)
         {
             string path = filename + ".csv";
             string text = "Статистика: \n";

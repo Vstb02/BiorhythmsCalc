@@ -24,7 +24,29 @@ namespace BiorhythmsCalc
         public MainWindow()
         {
             InitializeComponent();
+            frame.Navigate(new MainView());
+        }
 
+        /// <summary>
+        /// Вызов фрейма с расчетом биоритмов для двух людей
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Compatibility_Click(object sender, RoutedEventArgs e)
+        {
+            m1.Background = Brushes.White;
+            m2.Background = Brushes.WhiteSmoke;
+            frame.Navigate(new Compatibility());
+        }
+        /// <summary>
+        ///  Вызов фрейма с расчетом биоритмов для одного человека
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ForOne_Click(object sender, RoutedEventArgs e)
+        {
+            m1.Background = Brushes.WhiteSmoke;
+            m2.Background = Brushes.White;
             frame.Navigate(new MainView());
         }
     }

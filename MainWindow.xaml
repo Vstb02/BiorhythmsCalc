@@ -7,7 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900" MinWidth="900">
     <Grid>
-        <Frame x:Name="frame"></Frame>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu VerticalAlignment="Top">
+            <MenuItem x:Name="m1" Background="White" Click="Compatibility_Click" Header="Для одного"></MenuItem>
+            <MenuItem x:Name="m2" Background="WhiteSmoke" Click="ForOne_Click" Header="Совместимость"></MenuItem>
+        </Menu>
+        <Frame NavigationUIVisibility="Hidden" Grid.Row="1" x:Name="frame"></Frame>
     </Grid>
 </Window>

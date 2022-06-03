@@ -7,7 +7,6 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,21 +14,18 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MessageBox = System.Windows.MessageBox;
-using Word = Microsoft.Office.Interop.Word;
 
 namespace BiorhythmsCalc.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainView.xaml
+    /// Логика взаимодействия для Compatibility.xaml
     /// </summary>
-    public partial class MainView : Page
+    public partial class Compatibility : Page
     {
         /// <summary>
         /// Список лейблов на графике
@@ -40,7 +36,7 @@ namespace BiorhythmsCalc.Views
         /// </summary>
         ObservableCollection<Biorhythm> biorhythms = new ObservableCollection<Biorhythm>();
 
-        public MainView()
+        public Compatibility()
         {
             InitializeComponent();
         }
@@ -74,6 +70,7 @@ namespace BiorhythmsCalc.Views
         {
             int arbitrarys = 0;
             DateTime birthDate = DateTime.Now;
+            DateTime birthDate1 = DateTime.Now;
             DateTime dateCountDown = DateTime.Now;
 
             try
@@ -88,6 +85,7 @@ namespace BiorhythmsCalc.Views
             try
             {
                 birthDate = Convert.ToDateTime(BirthDate.Text);
+                birthDate1 = Convert.ToDateTime(BirthDate1.Text);
             }
             catch
             {
@@ -116,14 +114,12 @@ namespace BiorhythmsCalc.Views
                     MessageBox.Show("Произошла ошибка при получении данных длительности");
                 }
             }
-
-            biorhythms = BioService.GetListBiorhythm(arbitrarys, dateCountDown, birthDate, biorhythms);
-
+            biorhythms.Clear();
+            biorhythms = BioService.GetListBiorhythm(arbitrarys, dateCountDown, birthDate, birthDate1, biorhythms);
             Dates.ItemsSource = biorhythms;
+            Stat.Stats(Dates, list, birthDate, birthDate1, arbitrarys, dateCountDown, biorhythms);
 
-            Stat.Stats(list, birthDate, arbitrarys, dateCountDown, biorhythms);
-
-            Chart.GetChart(biorhythms, ref Labels, chart);
+            Chart.GetChartForTwo(biorhythms, ref Labels, chart);
         }
 
         /// <summary>
@@ -133,7 +129,7 @@ namespace BiorhythmsCalc.Views
         /// <param name="e"></param>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Export.ExportDataToCsv(biorhythms, "datafile", list);
+            Export.ExportDataToCsv(biorhythms, "datafilefortwo", list);
         }
 
         /// <summary>
@@ -154,7 +150,7 @@ namespace BiorhythmsCalc.Views
         }
 
         /// <summary>
-        /// Отключение даты на граифке
+        /// Отключение даты на графике
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
