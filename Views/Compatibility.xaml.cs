@@ -140,10 +140,11 @@ namespace BiorhythmsCalc.Views
             {
                 Export.ExportDataToCsv(biorhythms, "datafilefortwo", list);
                 MessageBox.Show("Экспорт прошел успешно!");
+                check = false;
             }
             else
             {
-                MessageBox.Show("Сначала введите данных!");
+                MessageBox.Show("Сначала постройте гафик!");
             }
         }
 
