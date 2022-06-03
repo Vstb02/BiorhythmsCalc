@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiorhythmsCalc"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="900" MinWidth="900">
+        Title="Калькулятор биоритмов" Height="450" Width="900" MinWidth="900"
+        Icon="/Resources/Image/AppIcon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"></RowDefinition>

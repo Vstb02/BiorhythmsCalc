@@ -36,7 +36,7 @@ namespace BiorhythmsCalc
         {
             m1.Background = Brushes.White;
             m2.Background = Brushes.WhiteSmoke;
-            frame.Navigate(new Compatibility());
+            frame.Navigate(new MainView());
         }
         /// <summary>
         ///  Вызов фрейма с расчетом биоритмов для одного человека
@@ -47,7 +47,7 @@ namespace BiorhythmsCalc
         {
             m1.Background = Brushes.WhiteSmoke;
             m2.Background = Brushes.White;
-            frame.Navigate(new MainView());
+            frame.Navigate(new Compatibility());
         }
     }
 }

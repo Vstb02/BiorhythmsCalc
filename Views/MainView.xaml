@@ -66,7 +66,7 @@
                     </ComboBox>
 
                     <CheckBox VerticalAlignment="Center" Grid.Row="3" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
-                        <TextBlock>Произвольная длительность прогноза</TextBlock>
+                        <TextBlock>Произвольная длительность</TextBlock>
                     </CheckBox>
 
                     <TextBox x:Name="arbitrary" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="40px" Text="100" Grid.Row="5">

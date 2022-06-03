@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Image\AppIcon.ico" />
     <None Remove="Resources\Image\graph.png" />
     <None Remove="Resources\Image\word.png" />
   </ItemGroup>
@@ -23,8 +24,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="5.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
-    <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1003" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Image\AppIcon.ico" />
   </ItemGroup>
 
 </Project>
