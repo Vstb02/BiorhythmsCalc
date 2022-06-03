@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Image\AppIcon.ico" />
+    <EmbeddedResource Include="Resources\Image\AppIcon.ico" />
   </ItemGroup>
 
 </Project>

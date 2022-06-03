@@ -22,7 +22,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MessageBox = System.Windows.MessageBox;
-using Word = Microsoft.Office.Interop.Word;
 
 namespace BiorhythmsCalc.Views
 {
