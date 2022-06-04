@@ -82,7 +82,7 @@
 
             </GroupBox>
 
-            <GroupBox Grid.Column="1" Header="Рассчетные данные" Padding="5" Margin="5">
+            <GroupBox Grid.Column="1" Header="Расчетные данные" Padding="5" Margin="5">
                 <DataGrid IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Name="Dates" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Date}" Width="*" Header="Дата"></DataGridTextColumn>
@@ -112,7 +112,7 @@
                 </Button.Resources>
                 <StackPanel Orientation="Horizontal" Margin="5 0">
                     <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="0 0 5 0" Source="/Resources/Image/graph.png" Stretch="Fill" Width="20px" Height="15px" />
-                    <TextBlock VerticalAlignment="Center"><Run Text="Посторить гарфик"/></TextBlock>
+                    <TextBlock VerticalAlignment="Center"><Run Text="Построить гарфик"/></TextBlock>
                 </StackPanel>
             </Button>
             <Button VerticalAlignment="Center" Height="30px" Margin="10 0" Click="Button_Click_1">
